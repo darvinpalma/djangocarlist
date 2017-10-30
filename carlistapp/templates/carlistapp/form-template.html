@@ -1,0 +1,31 @@
+<style>
+div.errors{
+	position: relative;
+	left: 2em;
+}
+
+div.label{
+	float: left;
+}
+
+div.field{
+	clear: left;
+
+}
+</style>
+
+{% for field in form %}
+
+	<div class="label-errors">
+		<div class="label">
+			<span style="color:black; font-weight:bold; font-size: 14px;">{{ field.label_tag }}</span>
+		</div>
+		{% if field.errors %}
+			<div class="errors">{{ field.errors }}</div>
+		{% endif %}
+	</div>
+	<div class="field">
+		{{ field }}
+	</div>
+	
+{% endfor %}

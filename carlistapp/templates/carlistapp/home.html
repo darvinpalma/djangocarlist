@@ -1,0 +1,48 @@
+<div class="createnew-div">
+	<h3>Add New Car</h3>
+
+	<form class="form-horizontal" method="POST" action="{% url 'carlistapp:home' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+		{% include 'carlistapp/form-template.html' %}
+		<div>
+			<button type="submit">Submit</button>
+		</div>
+	</form>
+</div>
+
+<div class="changeposition-div">
+	<h3>Change Order of Cars</h3>
+	<form action="{% url 'carlistapp:editposition' %}" method="POST">
+		{% csrf_token %}
+		<label for="current_position">Current Position:</label>
+		<input id="current_position" type="number" name="current_position">
+		<label for="new_position">New Position:</label>
+		<input id="new_position" type="number" name="new_position">
+		<input type="submit" value="Change">
+	</form>
+	
+</div>
+
+<div class="selectcolor-div">
+	<h3>Select Cars by Color</h3>
+	<form action="{% url 'carlistapp:choosecolor' %}" method="POST" id="choosecolor-form">
+		{% csrf_token %}
+		<select name="colorselect" form="choosecolor-form">
+			{% for color_value in color_values %}
+		  		<option value={{ color_value.car_color }}>{{ color_value.car_color }}</option>
+		  	{% endfor %}
+		</select>
+		<input type="submit" value="Select">
+	</form>
+	
+</div>
+
+<div>
+	<h3>Current Car List</h3>
+	<p>
+		{% for car in all_cars %}
+			{{ car.car_position }}.&nbsp;{{ car.car_name }}&nbsp;=&nbsp;{{ car.car_color }}
+			<br>
+		{% endfor %}
+	</p>
+</div>
